@@ -1,6 +1,6 @@
 /* Base Styles */
 :root {
-  --capitec-blue: #29849b;
+  --capitec-blue: rgb(6, 185, 216);
   --capitec-light: #7dcceb;
   --text-dark: #333;
   --text-light: #666;
@@ -40,6 +40,15 @@ body {
   background: white;
 }
 
+.forme {
+  display: inline;
+  font-size: 1.5rem;
+  color: white;
+  border-radius: 50px;
+  background: rgb(6, 185, 216);
+  padding: 10px 20px;
+}
+
 .app-footer {
   text-align: center;
   padding: 15px;
@@ -68,6 +77,7 @@ body {
   font-size: 0.8rem;
   color: var(--text-light);
   max-width: 300px;
+  margin-top: 750px;
 }
 
 /* Main Menu */
@@ -78,18 +88,16 @@ body {
 }
 
 .greetings {
-  margin: 10px 0;
-  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .greetings strong {
   display: block;
-}
-
-.user-section {
-  margin: 25px 0;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #eee;
+  font-size: 5rem;
+  color: rgb(245, 46, 46);
 }
 
 .menu-options {
