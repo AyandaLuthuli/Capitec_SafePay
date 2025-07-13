@@ -1,0 +1,191 @@
+/* Base Styles */
+:root {
+  --capitec-blue: #29849b;
+  --capitec-light: #7dcceb;
+  --text-dark: #333;
+  --text-light: #666;
+  --border-radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Screen Layout */
+.screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Shared Components */
+.app-header {
+  text-align: center;
+  padding: 20px;
+  background: white;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 15px;
+  margin-top: auto;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Splash Screen */
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.logo {
+  width: min(180px, 50vw);
+  margin-bottom: 20px;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  max-width: 300px;
+}
+
+/* Main Menu */
+.menu-content {
+  flex: 1;
+  padding: 20px;
+  background: white;
+}
+
+.greetings {
+  margin: 10px 0;
+  line-height: 1.8;
+}
+
+.greetings strong {
+  display: block;
+}
+
+.user-section {
+  margin: 25px 0;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.menu-options {
+  display: grid;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.menu-btn {
+  padding: 15px;
+  border: 1px solid var(--capitec-blue);
+  border-radius: var(--border-radius);
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.menu-btn.primary {
+  background: var(--capitec-blue);
+  color: white;
+}
+
+.menu-btn:hover {
+  background: var(--capitec-light);
+}
+
+/* PIN Screen */
+.pin-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: white;
+}
+
+.pin-display {
+  font-size: 2rem;
+  letter-spacing: 10px;
+  margin: 20px 0;
+  color: var(--capitec-blue);
+  min-height: 40px;
+}
+
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.pin-btn {
+  height: 60px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pin-btn:hover {
+  background: var(--capitec-light);
+}
+
+#clear-btn,
+#submit-btn {
+  background: #f5f5f5;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .screen {
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .splash-content {
+    padding: 40px;
+  }
+
+  .menu-content,
+  .pin-content {
+    padding: 30px;
+  }
+
+  .pin-pad {
+    gap: 20px;
+  }
+
+  .pin-btn {
+    height: 70px;
+    font-size: 1.8rem;
+  }
+}

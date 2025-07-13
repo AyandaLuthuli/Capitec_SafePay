@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Capitec SafePay</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Splash Screen -->
+    <div id="splash" class="screen">
+      <div class="splash-content">
+        <img src="capitecWelco.png" alt="Capitec Bank" class="logo" />
+        <p class="disclaimer">
+          Capitec Bank is an authorised financial services provider (FSP 46669)
+          and registered credit provider (NCRCPI3).
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="screen hidden">
+      <header class="app-header">
+        <h1>For me</h1>
+        <div class="greetings">
+          <strong>sawubona</strong>
+          <strong>hallo</strong>
+          <strong>hello</strong>
+          <strong>dumela</strong>
+        </div>
+      </header>
+
+      <main class="menu-content">
+        <section class="user-section">
+          <h2>Ayanda</h2>
+        </section>
+
+        <div class="menu-options">
+          <button class="menu-btn">Buy airtime and data</button>
+          <button class="menu-btn">Pay beneficiary</button>
+          <button class="menu-btn">Transfer money</button>
+          <button class="menu-btn">Pay me</button>
+          <button id="sign-in-btn" class="menu-btn primary">Sign In</button>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <p>Scan to pay</p>
+      </footer>
+    </div>
+
+    <!-- PIN Entry -->
+    <div id="pin-screen" class="screen hidden">
+      <header class="app-header">
+        <h1>Capitec SafePay</h1>
+      </header>
+
+      <main class="pin-content">
+        <h2>Enter your PIN</h2>
+        <div id="pin-display" class="pin-display">____</div>
+        <div class="pin-pad">
+          <button class="pin-btn" data-number="1">1</button>
+          <button class="pin-btn" data-number="2">2</button>
+          <button class="pin-btn" data-number="3">3</button>
+          <button class="pin-btn" data-number="4">4</button>
+          <button class="pin-btn" data-number="5">5</button>
+          <button class="pin-btn" data-number="6">6</button>
+          <button class="pin-btn" data-number="7">7</button>
+          <button class="pin-btn" data-number="8">8</button>
+          <button class="pin-btn" data-number="9">9</button>
+          <button id="clear-btn" class="pin-btn">C</button>
+          <button class="pin-btn" data-number="0">0</button>
+          <button id="submit-btn" class="pin-btn">→</button>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <p>Forgot PIN? Call 0860 10 20 43</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
