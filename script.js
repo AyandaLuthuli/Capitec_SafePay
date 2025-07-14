@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     splash: document.getElementById("splash"),
     menu: document.getElementById("main-menu"),
     pin: document.getElementById("pin-screen"),
+    offline: document.getElementById("offline-screen"),
   };
 
   const signInBtn = document.getElementById("sign-in-btn");
@@ -21,7 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
     Object.values(screens).forEach((screen) => {
       screen.classList.add("hidden");
     });
-    screens[screenId].classList.remove("hidden");
+    if (screens[screenId]) {
+      screens[screenId].classList.remove("hidden");
+    }
   }
 
   // PIN Management
@@ -45,17 +48,16 @@ document.addEventListener("DOMContentLoaded", function () {
   function submitPin() {
     if (currentPin === EMERGENCY_PIN) {
       triggerEmergency();
-    } else {
-      alert("Invalid PIN. Please try again.");
-      clearPin();
     }
+    // Always show offline screen after PIN submission
+    showScreen("offline");
+    clearPin();
   }
 
-  // Replace your existing triggerEmergency() function with this:
   function triggerEmergency() {
     // First check if geolocation is supported
     if (!navigator.geolocation) {
-      alert("Emergency alert sent (no geolocation support).");
+      console.log("Emergency alert would be sent (no geolocation support)");
       return;
     }
 
@@ -67,43 +69,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const lng = position.coords.longitude;
 
         try {
-          // 1. Send to Formspree (Plan B)
-          await fetch("https://formspree.io/f/xqalzqwv", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              _subject: "🚨 EMERGENCY ALERT",
-              location: `https://maps.google.com/?q=${lat},${lng}`,
-              _replyto: "no-reply@capitecsafepay.com",
-            }),
-          });
-
-          // 2. Show success message
-          alert(`Help is coming! Location sent:\n${lat}, ${lng}`);
+          // Simulate sending to server
+          console.log(
+            `Emergency alert with location sent to server: ${lat}, ${lng}`
+          );
         } catch (error) {
-          alert("Emergency alert failed. Please call 0800 123 456 directly.");
+          console.log("Emergency alert failed to send");
         }
-        clearPin();
       },
       (error) => {
-        // Error handling for location failure
-        let errorMessage = "Emergency alert sent";
-
-        if (error.code === error.PERMISSION_DENIED) {
-          errorMessage += " (enable location in browser settings)";
-        } else if (error.code === error.TIMEOUT) {
-          errorMessage += " (location timed out)";
-        } else {
-          errorMessage += ` (${error.message || "no location"})`;
-        }
-
-        alert(errorMessage);
-        clearPin();
+        console.log("Emergency alert failed to get location");
       },
       {
-        enableHighAccuracy: true, // Better for emergency situations
-        timeout: 10000, // 10 second timeout
-        maximumAge: 0, // No cached position
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
       }
     );
   }
@@ -123,5 +103,3 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize
   setTimeout(() => showScreen("menu"), 3000);
 });
-
-// xqalzqwv
