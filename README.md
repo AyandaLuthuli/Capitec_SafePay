@@ -6,18 +6,18 @@ Demo:https://ayandaluthuli.github.io/Capitec_SafePay/
 Discreetly alerts trusted contacts when victims of gender-based violence (GBV) enter a secret PIN (0800). 
 Designed for South African users where banking apps are common and rarely questioned.
 
-#How it works 
-Plausible Deniability
+#key Features 
+1.Plausible Deniability
   - Fully functional "banking app" UI  
   - Hidden trigger only activates with PIN `0800`  
 
-  Instant Location Sharing
+2.Instant Location Sharing
   - Sends GPS coordinates via email (Formspree)  linked to my email 
   
- Safety First
+ 3.Safety First
   - No app installation needed (web-based)  
     
-  Responsive Design
+  4.Responsive Design
   - Works on all devices (feature phones to desktop)  
 
 
