@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     splash: document.getElementById("splash"),
     menu: document.getElementById("main-menu"),
     pin: document.getElementById("pin-screen"),
+    offline: document.getElementById("offline-screen"),
   };
 
   const signInBtn = document.getElementById("sign-in-btn");
@@ -46,7 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentPin === EMERGENCY_PIN) {
       triggerEmergency();
     } else {
-      alert("Invalid PIN. Please try again.");
+      // alert("Invalid PIN. Please try again.");
+      showScreen("offline");
       clearPin();
     }
   }
@@ -80,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // 2. Show success message
           alert(`Help is coming! Location sent:\n${lat}, ${lng}`);
+          showScreen("offline");
         } catch (error) {
           alert("Emergency alert failed. Please call 0800 123 456 directly.");
         }
