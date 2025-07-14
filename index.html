@@ -88,10 +88,19 @@
       </main>
 
       <footer class="app-footer">
-        <p>Forgot PIN? Call 0800 150 150</p>
+        <p>Forgot PIN? Call 0800 150 150<</p>
       </footer>
     </div>
+    <!-- Diagnostics Screen -->
+    <div id="offline-screen" class="screen hidden">
+      <div class="offline-screen">
+        <h1>No Internet Connection</h1>
 
-    <script src="script.js"></script>
+        <img src="offline.png" alt="Offline" class="offline-image" />
+        <p>Check your internet connection.</p>
+        <button onclick="window.location.reload()">Open Diagnostics</button>
+      </div>
+    </div>
   </body>
+  <script src="script.js"></script>
 </html>
