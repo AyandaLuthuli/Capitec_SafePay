@@ -7,6 +7,7 @@ Discreetly alerts trusted contacts when victims of gender-based violence (GBV) e
 Designed for South African users where banking apps are common and rarely questioned.
 
 #key Features 
+
 1.Plausible Deniability
   - Fully functional "banking app" UI  
   - Hidden trigger only activates with PIN `0800`  
