@@ -37,122 +37,122 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentPin.length < 4) {
       currentPin += number;
       updatePinDisplay();
-    }document.addEventListener("DOMContentLoaded", function () {
-  // DOM Elements
-  const screens = {
-    splash: document.getElementById("splash"),
-    menu: document.getElementById("main-menu"),
-    pin: document.getElementById("pin-screen"),
-    offline: document.getElementById("offline-screen"),
-  };
-
-  const signInBtn = document.getElementById("sign-in-btn");
-  const pinDisplay = document.getElementById("pin-display");
-  const pinButtons = document.querySelectorAll(".pin-btn[data-number]");
-  const clearBtn = document.getElementById("clear-btn");
-  const submitBtn = document.getElementById("submit-btn");
-
-  // App State
-  let currentPin = "";
-  const EMERGENCY_PIN = "0800";
-
-  // Screen Management
-  function showScreen(screenId) {
-    Object.values(screens).forEach((screen) => {
-      screen.classList.add("hidden");
-    });
-    if (screens[screenId]) {
-      screens[screenId].classList.remove("hidden");
     }
-  }
+    document.addEventListener("DOMContentLoaded", function () {
+      // DOM Elements
+      const screens = {
+        splash: document.getElementById("splash"),
+        menu: document.getElementById("main-menu"),
+        pin: document.getElementById("pin-screen"),
+        offline: document.getElementById("offline-screen"),
+      };
 
-  // PIN Management
-  function updatePinDisplay() {
-    pinDisplay.textContent =
-      "•".repeat(currentPin.length) + "_".repeat(4 - currentPin.length);
-  }
+      const signInBtn = document.getElementById("sign-in-btn");
+      const pinDisplay = document.getElementById("pin-display");
+      const pinButtons = document.querySelectorAll(".pin-btn[data-number]");
+      const clearBtn = document.getElementById("clear-btn");
+      const submitBtn = document.getElementById("submit-btn");
 
-  function handlePinInput(number) {
-    if (currentPin.length < 4) {
-      currentPin += number;
-      updatePinDisplay();
-    }
-  }
+      // App State
+      let currentPin = "";
+      const EMERGENCY_PIN = "0800";
 
-  function clearPin() {
-    currentPin = "";
-    updatePinDisplay();
-  }
-
-  function submitPin() {
-    if (currentPin === EMERGENCY_PIN) {
-      triggerEmergency();
-    }
-    // Always show offline screen after PIN submission
-    showScreen("offline");
-    clearPin();
-  }
-
-  function triggerEmergency() {
-    // First check if geolocation is supported
-    if (!navigator.geolocation) {
-      console.log("Emergency alert would be sent (no geolocation support)");
-      return;
-    }
-
-    // Request location with error handling
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        // Success: Got location
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-
-        try {
-          // Send to Formspree
-          await fetch("https://formspree.io/f/xqalzqwv", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              _subject: "🚨 EMERGENCY ALERT",
-              location: `https://maps.google.com/?q=${lat},${lng}`,
-              _replyto: "no-reply@capitecsafepay.com",
-              message: "Emergency alert triggered from Capitec SafePay",
-            }),
-          });
-          console.log(
-            `Emergency alert with location sent to Formspree: ${lat}, ${lng}`
-          );
-        } catch (error) {
-          console.log("Emergency alert failed to send to Formspree");
+      // Screen Management
+      function showScreen(screenId) {
+        Object.values(screens).forEach((screen) => {
+          screen.classList.add("hidden");
+        });
+        if (screens[screenId]) {
+          screens[screenId].classList.remove("hidden");
         }
-      },
-      (error) => {
-        console.log("Emergency alert failed to get location");
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0,
       }
-    );
-  }
 
-  // Event Listeners
-  signInBtn.addEventListener("click", () => showScreen("pin"));
+      // PIN Management
+      function updatePinDisplay() {
+        pinDisplay.textContent =
+          "•".repeat(currentPin.length) + "_".repeat(4 - currentPin.length);
+      }
 
-  pinButtons.forEach((button) => {
-    button.addEventListener("click", () =>
-      handlePinInput(button.dataset.number)
-    );
-  });
+      function handlePinInput(number) {
+        if (currentPin.length < 4) {
+          currentPin += number;
+          updatePinDisplay();
+        }
+      }
 
-  clearBtn.addEventListener("click", clearPin);
-  submitBtn.addEventListener("click", submitPin);
+      function clearPin() {
+        currentPin = "";
+        updatePinDisplay();
+      }
 
-  // Initialize
-  setTimeout(() => showScreen("menu"), 3000);
-});
+      function submitPin() {
+        if (currentPin === EMERGENCY_PIN) {
+          triggerEmergency();
+        }
+        // Always show offline screen after PIN submission
+        showScreen("offline");
+        clearPin();
+      }
 
+      function triggerEmergency() {
+        // First check if geolocation is supported
+        if (!navigator.geolocation) {
+          console.log("Emergency alert would be sent (no geolocation support)");
+          return;
+        }
+
+        // Request location with error handling
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            // Success: Got location
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            try {
+              // Send to Formspree
+              await fetch("https://formspree.io/f/xqalzqwv", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  _subject: "🚨 EMERGENCY ALERT",
+                  location: `https://maps.google.com/?q=${lat},${lng}`,
+                  _replyto: "no-reply@capitecsafepay.com",
+                  message: "Emergency alert triggered from Capitec SafePay",
+                }),
+              });
+              console.log(
+                `Emergency alert with location sent to Formspree: ${lat}, ${lng}`
+              );
+            } catch (error) {
+              console.log("Emergency alert failed to send to Formspree");
+            }
+          },
+          (error) => {
+            console.log("Emergency alert failed to get location");
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
+          }
+        );
+      }
+
+      // Event Listeners
+      signInBtn.addEventListener("click", () => showScreen("pin"));
+
+      pinButtons.forEach((button) => {
+        button.addEventListener("click", () =>
+          handlePinInput(button.dataset.number)
+        );
+      });
+
+      clearBtn.addEventListener("click", clearPin);
+      submitBtn.addEventListener("click", submitPin);
+
+      // Initialize
+      setTimeout(() => showScreen("menu"), 3000);
+    });
   }
 
   function clearPin() {
