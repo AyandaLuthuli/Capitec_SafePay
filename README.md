@@ -10,7 +10,8 @@ Designed for South African users where banking apps are common and rarely questi
 
 1.Plausible Deniability
   - Fully functional "banking app" UI  
-  - Hidden trigger only activates with PIN `0800`  
+  - Hidden trigger only activates with PIN `0800`
+  -GBV Hotline numuber (0800 150 150) as "Forgot pin" helpline
 
 2.Instant Location Sharing
   - Sends GPS coordinates via email (Formspree)  linked to my email 
