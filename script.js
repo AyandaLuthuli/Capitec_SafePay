@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // 2. Show success message
           alert(`Help is coming! Location sent:\n${lat}, ${lng}`);
-          showScreen("offline");
+          
         } catch (error) {
           alert("Emergency alert failed. Please call 0800 123 456 directly.");
         }
@@ -102,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         alert(errorMessage);
         clearPin();
+        showScreen("offline");
       },
       {
         enableHighAccuracy: true, // Better for emergency situations
