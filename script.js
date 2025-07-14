@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         alert(errorMessage);
         clearPin();
-        showScreen("offline");
+       
       },
       {
         enableHighAccuracy: true, // Better for emergency situations
