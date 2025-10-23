@@ -81,7 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
           });
 
           // 2. Show success message
-          alert(`Help is coming! Location sent:\n${lat}, ${lng}`);
+          // alert(`Help is coming! Location sent:\n${lat}, ${lng}`);
+            alert(`Request received ‼️`);
           
         } catch (error) {
           alert("Emergency alert failed. Please call 0800 123 456 directly.");
