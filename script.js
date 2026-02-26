@@ -1,17 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
   // DOM Elements
-  const screens = {
-    splash: document.getElementById("splash"),
-    menu: document.getElementById("main-menu"),
-    pin: document.getElementById("pin-screen"),
-    offline: document.getElementById("offline-screen"),
-  };
+const screens = {
+  splash: document.getElementById("splash"),
+  menu: document.getElementById("main-menu"),
+  pin: document.getElementById("pin-screen"),
+  dashboard: document.getElementById("dashboard-screen"), // New Screen
+};
 
   const signInBtn = document.getElementById("sign-in-btn");
   const pinDisplay = document.getElementById("pin-display");
   const pinButtons = document.querySelectorAll(".pin-btn[data-number]");
   const clearBtn = document.getElementById("clear-btn");
   const submitBtn = document.getElementById("submit-btn");
+const logoutBtn = document.getElementById("logout-btn");
+
+
+
+// 2. Add the Event Listener
+// Change "pin-screen" to "menu" or "pin"
+logoutBtn.addEventListener("click", () => {
+    // We use "menu" to go back to the "For Me" screen
+    showScreen("menu"); 
+    clearPin(); 
+});
 
   // App State
   let currentPin = "";
@@ -43,15 +54,18 @@ document.addEventListener("DOMContentLoaded", function () {
     updatePinDisplay();
   }
 
-  function submitPin() {
-    if (currentPin === EMERGENCY_PIN) {
-      triggerEmergency();
-    } else {
-      // alert("Invalid PIN. Please try again.");
-      showScreen("offline");
-      clearPin();
-    }
+function submitPin() {
+  if (currentPin === EMERGENCY_PIN) {
+    triggerEmergency();
+    // After triggering emergency, show the dashboard to "blend in"
+    showScreen("dashboard"); 
+  } else {
+    // Even on a wrong PIN, show the dashboard with fake data
+    // to make the app look functional to an observer
+    showScreen("dashboard");
+    clearPin();
   }
+}
 
   // Replace your existing triggerEmergency() function with this:
   function triggerEmergency() {
@@ -130,3 +144,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // xqalzqwv
+
+

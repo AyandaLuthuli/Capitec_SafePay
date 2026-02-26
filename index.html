@@ -1,106 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Capitec SafePay</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- Splash Screen -->
-    <div id="splash" class="screen">
-      <div class="splash-content">
-        <img src="capitecWelco.png" alt="Capitec Bank" class="logo" />
-        <p class="disclaimer">
-          Capitec Bank is an authorised financial services provider (LTD 0800)
-          and registered credit provider (AYA1703).
-        </p>
-      </div>
-    </div>
-
-    <!-- Main Menu -->
-    <div id="main-menu" class="screen hidden">
-      <header class="app-header">
-        <h1 class="forme">For me</h1>
-        <div class="greetings">
-          <img
-            src="hellpCap.png"
-            alt="Capitec Greeting"
-            class="greeting-image"
-            width="100%"
-            height="200"
-          />
-          <!-- <strong>sawubona</strong> -->
-          <!-- <strong>hallo</strong> -->
-          <!-- <strong>hello</strong> -->
-          <!-- <strong>dumela</strong> -->
+</head>
+<body>
+    <section id="splash" class="screen">
+        <div class="splash-content">
+            <img src="capitecWelco.png" alt="Capitec Bank" class="logo" />
+            <p class="disclaimer">
+                Capitec Bank is an authorised financial services provider (LTD 0800)
+                and registered credit provider (AYA1703).
+            </p>
         </div>
-        <h2>Sihle</h2>
-        <img src="dots.png" alt="Dots" class="dots" width="40" height="20" />
-      </header>
+    </section>
 
-      <main class="menu-content">
-        <div class="menu-options">
-          <div></div>
-          <button class="menu-btn">Buy airtime and data</button>
-          <button class="menu-btn">Pay beneficiary</button>
-          <button class="menu-btn">Transfer money</button>
-          <button class="menu-btn">Pay me</button>
-          <button id="sign-in-btn" class="menu-btn primary">Sign In</button>
-        </div>
-      </main>
+    <section id="main-menu" class="screen hidden">
+        <header class="app-header">
+            <h1 class="forme">For me</h1>
+            <div class="greetings">
+                <img src="hellpCap.png" alt="Capitec Greeting" class="greeting-image" width="100%" height="200" />
+            </div>
+            <h2>Sihle</h2>
+            <img src="dots.png" alt="Dots" class="dots" width="40" height="20" />
+        </header>
 
-      <footer class="app-footer">
-        <img
-          src="qrcode.png"
-          alt="Scan to pay"
-          class="scan-image"
-          width="50"
-          height="50"
-        />
-        <p>Scan to pay</p>
-      </footer>
-    </div>
+        <main class="menu-content">
+            <div class="menu-options">
+                <button class="menu-btn">Buy airtime and data</button>
+                <button class="menu-btn">Pay beneficiary</button>
+                <button class="menu-btn">Transfer money</button>
+                <button class="menu-btn">Pay me</button>
+                <button id="sign-in-btn" class="menu-btn primary">Sign In</button>
+            </div>
+        </main>
 
-    <!-- PIN Entry -->
-    <div id="pin-screen" class="screen hidden">
-      <header class="app-header">
-        <h1>Capitec SafePay</h1>
-      </header>
+        <footer class="app-footer" >
+            <img src="qrcode.png" alt="Scan to pay" class="scan-image" width="50" height="50" />
+            <p>Scan to pay</p>
+        </footer>
+    </section>
 
-      <main class="pin-content">
-        <h2>Enter your PIN</h2>
-        <div id="pin-display" class="pin-display">____</div>
-        <div class="pin-pad">
-          <button class="pin-btn" data-number="1">1</button>
-          <button class="pin-btn" data-number="2">2</button>
-          <button class="pin-btn" data-number="3">3</button>
-          <button class="pin-btn" data-number="4">4</button>
-          <button class="pin-btn" data-number="5">5</button>
-          <button class="pin-btn" data-number="6">6</button>
-          <button class="pin-btn" data-number="7">7</button>
-          <button class="pin-btn" data-number="8">8</button>
-          <button class="pin-btn" data-number="9">9</button>
-          <button id="clear-btn" class="pin-btn">C</button>
-          <button class="pin-btn" data-number="0">0</button>
-          <button id="submit-btn" class="pin-btn">→</button>
-        </div>
-      </main>
+    <section id="pin-screen" class="screen hidden">
+        <header class="app-header">
+            <h1>Capitec SafePay</h1>
+        </header>
+        <main class="pin-content">
+            <h2>Enter your PIN</h2>
+            <div id="pin-display" class="pin-display">____</div>
+            <div class="pin-pad">
+                <button class="pin-btn" data-number="1">1</button>
+                <button class="pin-btn" data-number="2">2</button>
+                <button class="pin-btn" data-number="3">3</button>
+                <button class="pin-btn" data-number="4">4</button>
+                <button class="pin-btn" data-number="5">5</button>
+                <button class="pin-btn" data-number="6">6</button>
+                <button class="pin-btn" data-number="7">7</button>
+                <button class="pin-btn" data-number="8">8</button>
+                <button class="pin-btn" data-number="9">9</button>
+                <button id="clear-btn" class="pin-btn">C</button>
+                <button class="pin-btn" data-number="0">0</button>
+                <button id="submit-btn" class="pin-btn">→</button>
+            </div>
+        </main>
+    </section>
 
-      <footer class="app-footer">
-        <p>Forgot PIN? Call 0800 150 150</p>
-      </footer>
-    </div>
-    <!-- Diagnostics Screen -->
-    <div id="offline-screen" class="screen hidden">
-      <div class="offline-screen">
-        <h1>No Internet Connection</h1>
+    <section id="dashboard-screen" class="screen hidden">
+        <nav class="top-nav">
+        <div class="profile-circle">S</div>
+        <h1 class="nav-title">GlobalOne</h1>
+        <button id="logout-btn" class="logout-link">Log out</button>
+    </nav>
 
-        <img src="offline.png" alt="Offline" class="offline-image" />
-        <p>Check your internet connection.</p>
-        <button onclick="window.location.reload()">Open Diagnostics</button>
-      </div>
-    </div>
-  </body>
-  <script src="script.js"></script>
+        <main class="dashboard-body">
+            <div class="dashboard-header">
+                <span>My dashboard</span>
+                <a href="#" class="edit-link">Edit ></a>
+            </div>
+
+            <div class="account-list">
+                <div class="card main-acc">
+                    <div class="card-icon blue">⇅</div>
+                    <div class="card-text">
+                        <h3>Main Account</h3>
+                        <p class="balance">R 2,450.00</p>
+                    </div>
+                </div>
+
+                <div class="card savings-acc">
+                    <div class="card-icon navy">📊</div>
+                    <div class="card-text">
+                        <h3>Savings Plans</h3>
+                        <p class="balance">R 12,800.45</p>
+                    </div>
+                </div>
+
+                <div class="card insurance-card">
+                    <div class="card-icon gray">🛡️</div>
+                    <div class="card-text">
+                        <h3>Insure</h3>
+                        <p>Cover for you and your family</p>
+                    </div>
+                    <span class="dismiss">×</span>
+                </div>
+            </div>
+
+            <div class="promo-section">
+                <p class="section-label">For You</p>
+                <div class="card credit-promo">
+                    <div class="card-icon white">📱</div>
+                    <div class="card-text">
+                        <h3>Get the credit you need</h3>
+                        <p>See what you qualify for</p>
+                    </div>
+                    <span class="dismiss">×</span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bottom-tab-nav">
+            <div class="tab active"><span>🏠</span><p>Home</p></div>
+            <div class="tab"><span>💳</span><p>Cards</p></div>
+            <div class="tab transact-circle"><span>⇅</span><p>Transact</p></div>
+            <div class="tab"><span>💬</span><p>Messages</p></div>
+            <div class="tab"><span>🔍</span><p>Explore</p></div>
+        </footer>
+    </section>
+
+    <script src="script.js"></script>
+</body>
 </html>

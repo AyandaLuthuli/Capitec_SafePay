@@ -1,52 +1,146 @@
-/* Base Styles */
+/* --- 1. Variables & Reset --- */
 :root {
-  --capitec-blue: rgb(6, 185, 216);
-  --capitec-light: #7dcceb;
-  --text-dark: #333;
-  --text-light: #666;
+  --capitec-blue: #0070ba;
+  --capitec-navy: #2b4361;
+  --capitec-sky: #5ea1d7;
+  --capitec-red: #eb0029;
+  --bg-light: #f0f3f7;
+  --white: #ffffff;
+  --text-dark: #333333;
+  --text-grey: #888888;
   --border-radius: 8px;
+  --transition: all 0.2s ease;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Arial", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 body {
-  background-color: #f5f5f5;
+  background-color: #333; /* Background for desktop viewing */
   color: var(--text-dark);
-  line-height: 1.6;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
 }
 
-/* Screen Layout */
+/* --- 2. Screen & App Layout --- */
 .screen {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  max-width: 100%;
+  width: 100%;
+  max-width: 414px; /* Mimic iPhone 11/12/13 width */
+  height: 100vh;
+  background-color: var(--white);
+  position: relative;
   overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
-/* Shared Components */
-.app-header {
+/* --- 3. Splash Screen --- */
+#splash {
+  background-color: var(--white);
+  justify-content: center;
+  align-items: center;
   text-align: center;
+}
+
+.splash-content .logo {
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  color: var(--text-grey);
+  padding: 0 40px;
+}
+
+/* --- 4. Main Menu (Pre-Login) --- */
+.app-header {
   padding: 20px;
-  background: white;
+  text-align: center;
 }
 
 .forme {
-  display: inline;
-  font-size: 1.5rem;
+  display: inline-block;
+  background: var(--capitec-sky);
   color: white;
+  padding: 8px 25px;
   border-radius: 50px;
-  background: rgb(6, 185, 216);
-  padding: 10px 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.menu-btn {
+  padding: 16px;
+  border: 1px solid var(--capitec-sky);
+  border-radius: var(--border-radius);
+  background: white;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.menu-btn.primary {
+  background: var(--capitec-sky);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* --- 5. PIN Screen --- */
+.pin-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.pin-display {
+  font-size: 2.5rem;
+  letter-spacing: 15px;
+  margin: 30px 0;
+  color: var(--capitec-blue);
+}
+
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 80%;
+}
+
+.pin-btn {
+  aspect-ratio: 1/1;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  background: #fdfdfd;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.pin-btn:active {
+  background: #eee;
 }
 
 .app-footer {
@@ -57,159 +151,151 @@ body {
   font-size: 0.9rem;
 }
 
-/* Splash Screen */
-.splash-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100vh;
-  padding: 20px;
-}
-
-.logo {
-  width: min(180px, 50vw);
-  margin-bottom: 20px;
-}
-
-.disclaimer {
-  font-size: 0.8rem;
-  color: var(--text-light);
-  max-width: 300px;
-}
-
-/* Main Menu */
-.menu-content {
-  flex: 1;
-  padding: 20px;
-  background: white;
-}
-
-.greetings {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.greetings strong {
-  display: block;
-  font-size: 5rem;
-  color: rgb(245, 46, 46);
-}
-
-.menu-options {
-  display: grid;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.menu-btn {
-  padding: 15px;
-  border: 1px solid var(--capitec-blue);
-  border-radius: var(--border-radius);
-  background: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.menu-btn.primary {
-  background: var(--capitec-blue);
+/* --- 6. GlobalOne Dashboard (The Decoy) --- */
+.top-nav {
+  background: linear-gradient(to right, #0070ba, #005a9c);
   color: white;
-}
-
-.menu-btn:hover {
-  background: var(--capitec-light);
-}
-
-/* PIN Screen */
-.pin-content {
-  flex: 1;
+  padding: 45px 15px 15px; /* Top padding for phone status bar */
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: white;
 }
 
-.pin-display {
-  font-size: 2rem;
-  letter-spacing: 10px;
-  margin: 20px 0;
-  color: var(--capitec-blue);
-  min-height: 40px;
-}
-
-.pin-pad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  width: 100%;
-  max-width: 300px;
-}
-
-.pin-btn {
-  height: 60px;
-  border: 1px solid #ddd;
+.profile-circle {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: background 0.2s;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
-.pin-btn:hover {
-  background: var(--capitec-light);
+.dashboard-body {
+  background-color: var(--bg-light);
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
 }
 
-#clear-btn,
-#submit-btn {
-  background: #f5f5f5;
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
-/* Responsive Adjustments */
-@media (min-width: 768px) {
-  .screen {
-    max-width: 400px;
-    margin: 0 auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .splash-content {
-    padding: 40px;
-  }
-
-  .menu-content,
-  .pin-content {
-    padding: 30px;
-  }
-
-  .pin-pad {
-    gap: 20px;
-  }
-
-  .pin-btn {
-    height: 70px;
-    font-size: 1.8rem;
-  }
+.logout-link {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
 }
 
-.hidden {
-  display: none;
+.logout-link:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
-.offline-screen {
-  text-align: center;
-  padding: 20px;
-  margin-top: 50px;
+
+.logout-link:active {
+    opacity: 0.7;
 }
-.offline-screen button {
-  background-color: #007bff;
+.edit-link {
+  color: var(--capitec-blue);
+  text-decoration: none;
+}
+
+/* Account Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin-top: 20px;
+}
+
+.card-icon.blue { background-color: var(--capitec-sky); }
+.card-icon.navy { background-color: var(--capitec-navy); }
+.card-icon.gray { background-color: #99abbd; }
+.card-icon.white { background-color: white; border: 1px solid #eee; color: #333; }
+
+.card-text h3 {
+  font-size: 0.95rem;
+  color: var(--capitec-blue);
+  margin-bottom: 2px;
+}
+
+.balance {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.dismiss {
+  margin-left: auto;
+  color: var(--capitec-sky);
+  font-size: 1.2rem;
+}
+
+/* --- 7. Bottom Navigation --- */
+.bottom-tab-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  padding: 10px 5px;
+  height: 80px;
+}
+
+.tab {
+  text-align: center;
+  color: var(--text-grey);
+  font-size: 0.7rem;
+  flex: 1;
+}
+
+.tab span {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.tab.active {
+  color: var(--capitec-blue);
+}
+
+.transact-circle {
+  position: relative;
+  background: var(--bg-light);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 5px solid var(--bg-light);
+  margin-top: -45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10;
 }
