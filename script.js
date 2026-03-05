@@ -1,148 +1,130 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // DOM Elements
-const screens = {
-  splash: document.getElementById("splash"),
-  menu: document.getElementById("main-menu"),
-  pin: document.getElementById("pin-screen"),
-  dashboard: document.getElementById("dashboard-screen"), // New Screen
-};
+    // --- 1. DOM Registry ---
+    const screens = {
+        splash: document.getElementById("splash"),
+        menu: document.getElementById("main-menu"),
+        pin: document.getElementById("pin-screen"),
+        dashboard: document.getElementById("dashboard-screen"),
+        accountDetail: document.getElementById("account-detail-screen") // Critical Fix: Added this
+    };
 
-  const signInBtn = document.getElementById("sign-in-btn");
-  const pinDisplay = document.getElementById("pin-display");
-  const pinButtons = document.querySelectorAll(".pin-btn[data-number]");
-  const clearBtn = document.getElementById("clear-btn");
-  const submitBtn = document.getElementById("submit-btn");
-const logoutBtn = document.getElementById("logout-btn");
+    // Elements
+    const signInBtn = document.getElementById("sign-in-btn");
+    const pinDisplay = document.getElementById("pin-display");
+    const pinButtons = document.querySelectorAll(".pin-btn[data-number]");
+    const clearBtn = document.getElementById("clear-btn");
+    const submitBtn = document.getElementById("submit-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const accountCard = document.querySelector(".main-acc");
+    const backToDashBtn = document.getElementById("back-to-dash");
+    const txnContainer = document.querySelector(".transaction-list");
 
+    // --- 2. App State ---
+    let currentPin = "";
+    const EMERGENCY_PIN = "0800";
+    const transactions = [
+        { name: "Uber", date: "03 Mar 2026", category: "Public Transport", amount: -25.00 },
+        { name: "Money Transfer", date: "03 Mar 2026", category: "Transfer", amount: 6500.00 },
+        { name: "Dl Bolt", date: "03 Mar 2026", category: "Other Transport", amount: -59.00 },
+        { name: "McDonalds", date: "02 Mar 2026", category: "Takeaways", amount: -72.80 }
+    ];
 
+    // --- 3. Core Functions ---
+    function showScreen(screenId) {
+        if (!screens[screenId]) {
+            console.error(`Screen "${screenId}" not found!`);
+            return;
+        }
+        Object.values(screens).forEach(screen => screen.classList.add("hidden"));
+        screens[screenId].classList.remove("hidden");
+    }
 
-// 2. Add the Event Listener
-// Change "pin-screen" to "menu" or "pin"
-logoutBtn.addEventListener("click", () => {
-    // We use "menu" to go back to the "For Me" screen
-    showScreen("menu"); 
-    clearPin(); 
-});
+    function renderTransactions() {
+        if (!txnContainer) return;
+        txnContainer.innerHTML = transactions.map(txn => `
+            <div class="transaction-item">
+                <div class="txn-info">
+                    <h4>${txn.name}</h4>
+                    <p>${txn.date} • ${txn.category}</p>
+                </div>
+                <div class="txn-amount ${txn.amount < 0 ? 'negative' : 'positive'}">
+                    ${txn.amount < 0 ? '-' : ''}R ${Math.abs(txn.amount).toFixed(2)}
+                </div>
+            </div>
+        `).join('');
+    }
 
-  // App State
-  let currentPin = "";
-  const EMERGENCY_PIN = "0800";
+    function updatePinDisplay() {
+        pinDisplay.textContent = "•".repeat(currentPin.length) + "_".repeat(4 - currentPin.length);
+    }
 
-  // Screen Management
-  function showScreen(screenId) {
-    Object.values(screens).forEach((screen) => {
-      screen.classList.add("hidden");
+    function handlePinInput(number) {
+        if (currentPin.length < 4) {
+            currentPin += number;
+            updatePinDisplay();
+        }
+    }
+
+    function clearPin() {
+        currentPin = "";
+        updatePinDisplay();
+    }
+
+    async function triggerEmergency() {
+        if (!navigator.geolocation) return;
+        
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude, longitude } = position.coords;
+            try {
+                await fetch("https://formspree.io/f/xqalzqwv", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        _subject: "🚨 EMERGENCY ALERT",
+                        location: `https://www.google.com/maps?q=${latitude},${longitude}`,
+                    }),
+                });
+                alert(`Request received ‼️`);
+            } catch (e) {
+                console.error("Alert failed");
+            }
+        });
+    }
+
+    function submitPin() {
+        if (currentPin === EMERGENCY_PIN) {
+            triggerEmergency();
+            showScreen("dashboard"); 
+        } else if (currentPin.length === 4) {
+            showScreen("dashboard");
+            clearPin();
+        }
+    }
+
+    // --- 4. Event Listeners ---
+    logoutBtn.addEventListener("click", () => {
+        showScreen("menu");
+        clearPin();
     });
-    screens[screenId].classList.remove("hidden");
-  }
 
-  // PIN Management
-  function updatePinDisplay() {
-    pinDisplay.textContent =
-      "•".repeat(currentPin.length) + "_".repeat(4 - currentPin.length);
-  }
+    signInBtn.addEventListener("click", () => showScreen("pin"));
 
-  function handlePinInput(number) {
-    if (currentPin.length < 4) {
-      currentPin += number;
-      updatePinDisplay();
-    }
-  }
+    pinButtons.forEach(btn => {
+        btn.addEventListener("click", () => handlePinInput(btn.dataset.number));
+    });
 
-  function clearPin() {
-    currentPin = "";
-    updatePinDisplay();
-  }
+    clearBtn.addEventListener("click", clearPin);
+    submitBtn.addEventListener("click", submitPin);
 
-function submitPin() {
-  if (currentPin === EMERGENCY_PIN) {
-    triggerEmergency();
-    // After triggering emergency, show the dashboard to "blend in"
-    showScreen("dashboard"); 
-  } else {
-    // Even on a wrong PIN, show the dashboard with fake data
-    // to make the app look functional to an observer
-    showScreen("dashboard");
-    clearPin();
-  }
-}
+    accountCard.addEventListener("click", () => {
+        renderTransactions();
+        showScreen("accountDetail");
+    });
 
-  // Replace your existing triggerEmergency() function with this:
-  function triggerEmergency() {
-    // First check if geolocation is supported
-    if (!navigator.geolocation) {
-      alert("Emergency alert sent (no geolocation support).");
-      return;
-    }
+    backToDashBtn.addEventListener("click", () => {
+        showScreen("dashboard");
+    });
 
-    // Request location with error handling
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        // Success: Got location
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-
-        try {
-          // 1. Send to Formspree (Plan B)
-          await fetch("https://formspree.io/f/xqalzqwv", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              _subject: "🚨 EMERGENCY ALERT",
-              location: `https://maps.google.com/?q=${lat},${lng}`,
-              _replyto: "no-reply@capitecsafepay.com",
-            }),
-          });
-
-          // 2. Show success message
-          // alert(`Help is coming! Location sent:\n${lat}, ${lng}`);
-            alert(`Request received ‼️`);
-          
-        } catch (error) {
-          alert("Emergency alert failed. Please call 0800 123 456 directly.");
-        }
-        clearPin();
-      },
-      (error) => {
-        // Error handling for location failure
-        let errorMessage = "Emergency alert sent";
-
-        if (error.code === error.PERMISSION_DENIED) {
-          errorMessage += " (enable location in browser settings)";
-        } else if (error.code === error.TIMEOUT) {
-          errorMessage += " (location timed out)";
-        } else {
-          errorMessage += ` (${error.message || "no location"})`;
-        }
-
-        alert(errorMessage);
-        clearPin();
-       
-      },
-      {
-        enableHighAccuracy: true, // Better for emergency situations
-        timeout: 10000, // 10 second timeout
-        maximumAge: 0, // No cached position
-      }
-    );
-  }
-
-  // Event Listeners
-  signInBtn.addEventListener("click", () => showScreen("pin"));
-
-  pinButtons.forEach((button) => {
-    button.addEventListener("click", () =>
-      handlePinInput(button.dataset.number)
-    );
-  });
-
-  clearBtn.addEventListener("click", clearPin);
-  submitBtn.addEventListener("click", submitPin);
-
-  // Initialize
-  setTimeout(() => showScreen("menu"), 3000);
+    // --- 5. Init ---
+    setTimeout(() => showScreen("menu"), 2500);
 });
-
-// xqalzqwv
-
-

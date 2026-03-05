@@ -299,3 +299,112 @@ body {
   justify-content: center;
   z-index: 10;
 }
+/* --- Account Detail Styles --- */
+.detail-header {
+    background-color: var(--capitec-blue);
+    color: white;
+    padding: 40px 15px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.available-banner {
+    background: linear-gradient(to bottom, #3a93d0, #2575b1);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    position: relative;
+}
+
+.available-banner h2 { font-size: 2rem; margin-top: 5px; }
+
+.filter-tabs {
+    display: flex;
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-item {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.tab-item.active {
+    color: var(--capitec-blue);
+    border-bottom: 3px solid var(--capitec-blue);
+    font-weight: bold;
+}
+
+.transaction-list {
+    background: white;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.txn-info h4 { font-size: 0.95rem; margin-bottom: 2px; }
+.txn-info p { font-size: 0.75rem; color: #999; }
+
+.txn-amount { font-weight: bold; }
+.txn-amount.negative { color: #d9534f; }
+.txn-amount.positive { color: #5cb85c; }
+.main-acc {
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+.main-acc:active {
+    transform: scale(0.98);
+    background-color: #f9f9f9;
+}
+
+/* --- Back Button Styling --- */
+.back-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem; /* Large enough to be a clear touch target */
+    font-weight: 300;
+    cursor: pointer;
+    padding: 0 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+    -webkit-tap-highlight-color: transparent; /* Removes blue box on mobile tap */
+}
+
+.back-btn:hover {
+    opacity: 0.8;
+}
+
+.back-btn:active {
+    transform: scale(0.9); /* Visual feedback when pressed */
+    opacity: 0.6;
+}
+
+/* Specific Header Adjustment to align title with back button */
+.detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the left */
+}
+
+.detail-header h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+    flex-grow: 1; /* Pushes icons to the right */
+}
+
